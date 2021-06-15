@@ -2,9 +2,9 @@
   "name": "kata-pricing",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "rimraf public && mkdir public && npx tsc index.ts --outDir public && node public/index.js",
+    "start": "rimraf public && mkdir public && npx tsc src/index.ts --outDir public && node public/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
