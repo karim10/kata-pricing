@@ -26,7 +26,7 @@ export function getCostTrailByItem(
   goods: number
 ): CostTrail {
   const pricePerUnit = unitaryPricingModel.price / unitaryPricingModel.unit;
-  const eligibleForPromotion = unitaryPricingModel.promotion.for < goods;
+  const eligibleForPromotion = unitaryPricingModel.promotion?.for < goods;
   if (unitaryPricingModel.promotion == undefined || !eligibleForPromotion) {
     // calculate cost per unit without promotion
     return [
@@ -78,7 +78,7 @@ export function getCostTrailByWeight(
 ) {
   const pricePerWeightUnit =
     weightPricingModel.price / weightPricingModel.unit.number;
-  const eligibleForPromotion = weightPricingModel.promotion.for < goods;
+  const eligibleForPromotion = weightPricingModel.promotion?.for < goods;
   if (weightPricingModel.promotion == undefined && !eligibleForPromotion) {
     // calculate cost per unit without promotion
     return [

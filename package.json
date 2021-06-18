@@ -5,11 +5,14 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "rimraf public && mkdir public && npx tsc src/index.ts --outDir public && node public/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
   },
   "dependencies": {
