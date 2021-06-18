@@ -12,23 +12,10 @@ export interface Weight {
 
 export type Unit = Weight | number;
 
-export interface WeightPricingModel {
-  perItem: false;
-  price: number;
-  unit: WeightUnit;
-  promotion?: {
-    for: Weight;
-    get: {
-      unit: WeightUnit;
-      price: number;
-    };
-  };
-}
-
 export interface UnitaryPricingModel {
   perItem: true;
   price: number;
-  unit: 1;
+  unit: number;
   promotion?: {
     for: number;
     get: {
@@ -38,6 +25,19 @@ export interface UnitaryPricingModel {
   };
 }
 
-export type CostTrail = Array<{ goods: Unit; cost: number }>;
+export interface WeightPricingModel {
+  perItem: false;
+  price: number;
+  unit: Weight;
+  promotion?: {
+    for: Weight;
+    get: {
+      unit: Weight;
+      price: number;
+    };
+  };
+}
 
 export type PricingModel = WeightPricingModel | UnitaryPricingModel;
+
+export type CostTrail = Array<{ goods: Unit; cost: number }>;

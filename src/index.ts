@@ -1,9 +1,10 @@
 import {
   getCostTrailByItem,
   getCostTrailByWeight,
+  // getCostTrailByWeight,
   isFractionalMoney,
 } from "./helpers";
-import { PricingModel, Unit, CostTrail } from "./types";
+import { PricingModel, Unit, CostTrail, WeightUnit } from "./types";
 import { isUnitPerItem, isUnitPerWeight } from "./type_guards";
 
 class Product {
@@ -32,7 +33,7 @@ class Product {
     }
 
     // By Weight
-    if (this.pricingModel.perItem && isUnitPerItem(goods)) {
+    if (this.pricingModel.perItem == false && isUnitPerWeight(goods)) {
       return getCostTrailByWeight(this.pricingModel, goods);
     }
 
@@ -40,10 +41,43 @@ class Product {
   }
 }
 
-const beans_example = new Product({
+const by_unit_example = new Product({
   perItem: true,
   price: 1,
   unit: 2,
+  promotion: {
+    for: 2,
+    get: {
+      unit: 2,
+      price: 0.5,
+    },
+  },
 });
 
-console.log("Hello: ", beans_example.getCostFor(10));
+const by_item_example = new Product({
+  perItem: false,
+  price: 1,
+  unit: {
+    weightUnit: WeightUnit.kg,
+    number: 1,
+  },
+  promotion: {
+    for: {
+      weightUnit: WeightUnit.kg,
+      number: 2,
+    },
+    get: {
+      unit: {
+        weightUnit: WeightUnit.kg,
+        number: 1,
+      },
+      price: 0.5,
+    },
+  },
+});
+
+// console.log("by unit example: ", by_unit_example.getCostFor(1));
+console.log(
+  "by weight example: ",
+  by_item_example.getCostFor({ weightUnit: WeightUnit.kg, number: 10 })
+);
